@@ -8,23 +8,23 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Btn from "../components/Btn";
 import { Box } from "@mui/material";
 
-const height = 'h-[90vh] sm:h-[80vh]'
+// const height = 'h-[90vh] sm:h-[80vh]'
+const height = "h-screen";
 
 export default function Home(props) {
-
   const items = [
     {
       name: "Test1",
       desc: "test1desc",
       button: "btn",
-      image: `/images/trainer1.jpg`,
+      image: `/images/trainer1.jpg`
     },
     {
       name: "Test2",
       desc: "test2desc",
       button: "btn",
-      image: `/images/rope-exercise.jpg`,
-    },
+      image: `/images/rope-exercise.jpg`
+    }
   ];
 
   return (
@@ -39,10 +39,13 @@ export default function Home(props) {
 }
 
 function Item(props) {
-  console.log(props.item.image)
+  console.log(props.item.image);
   return (
     <Box className={`bg-white/50 ${height} w-full flex flex-col relative`}>
-      <img src={props.item.image} className="object-cover absolute top-0 right-0 h-full w-full -z-10"/>
+      <img
+        src={props.item.image}
+        className="object-cover absolute top-0 right-0 h-full w-full -z-10"
+      />
 
       <h2>{props.item.name}</h2>
       <p>{props.item.desc}</p>
@@ -53,4 +56,3 @@ function Item(props) {
     </Box>
   );
 }
-
