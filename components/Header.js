@@ -14,8 +14,9 @@ import {
   CssBaseline,
   Container,
   useScrollTrigger,
-  Slide
+  Slide,
 } from "@mui/material";
+import { loadGetInitialProps } from "next/dist/shared/lib/utils";
 
 const style = {
   position: "absolute",
@@ -26,16 +27,16 @@ const style = {
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
-  p: 4
+  p: 4,
 };
 
 const buttonsTitle = [
-  "My store",
-  "Prices",
-  "On-Demand",
-  "Live Classes",
-  "Testimonials",
-  "Contact"
+  "get started",
+  "services",
+  "resolved cases",
+  "resources",
+  "about",
+  "clients",
 ];
 
 function HideOnScroll(props) {
@@ -44,7 +45,7 @@ function HideOnScroll(props) {
   // will default to window.
   // This is only being set here because the demo is in an iframe.
   const trigger = useScrollTrigger({
-    target: window ? window() : undefined
+    target: window ? window() : undefined,
   });
 
   return (
@@ -60,7 +61,7 @@ HideOnScroll.propTypes = {
    * Injected by the documentation to work in an iframe.
    * You won't need it on your project.
    */
-  window: PropTypes.func
+  window: PropTypes.func,
 };
 
 function Header(props) {
@@ -76,11 +77,19 @@ function Header(props) {
     !open ? setOpen(true) : setOpen(false);
   };
 
+  function capWords(arr) {
+    return arr.map((el) => {
+      return el.charAt(0).toUpperCase() + el.substring(1).toLowerCase();
+    });
+  }
+
+  const capTitle = capWords(buttonsTitle);
+
   return (
     <React.Fragment>
       <CssBaseline />
       <HideOnScroll {...props}>
-        <AppBar sx={{ bgcolor: "secondary" }}>
+        <AppBar className="bg-blue-200">
           <Toolbar>
             <header className="w-full">
               <nav className="flex justify-between">
@@ -105,7 +114,7 @@ function Header(props) {
                   aria-describedby="modal-modal-description"
                 >
                   <Box className="absolute top-1/2 left-1/2  -translate-y-1/2 -translate-x-1/2 bg-white p-2 border-2 border-black shadow-2xl max-w-sm w-11/12 sm:w-full rounded ">
-                    {buttonsTitle.map((btn, i) => (
+                    {capTitle.map((btn, i) => (
                       <Btn title={btn} key={i} />
                     ))}
                   </Box>
@@ -114,11 +123,17 @@ function Header(props) {
                   <OpenClose open={open} setOpen={setOpen} />
                 </Button>
 
-                <div className="lg:flex hidden justify-center">
-                  {buttonsTitle.map((btn, i) => (
+                <Box className="lg:flex hidden justify-center">
+                  {/* {capTitle.map((btn, i) => (
                     <Btn title={btn} key={i} />
-                  ))}
-                </div>
+                  ))} */}
+                  {
+                  capTitle.map((btn) => (
+                    <Button variant="contained" color="primary">{btn}</Button>
+                  ))
+                  }
+            
+                </Box>
               </nav>
             </header>
           </Toolbar>
